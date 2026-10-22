@@ -3,7 +3,8 @@
   var TZ=window.TZ=window.TZ||{};TZ.components=TZ.components||{};
   TZ.components.car=function(el){
     var h='<div class="c-shadow"></div><div class="c-solid">';
-    var cols=['#04384f','#05425d','#065072','#075e86','#0A6B96','#1a82b1'];
+    var P={blue:['#04384f','#05425d','#065072','#075e86','#0A6B96','#1a82b1'],ice:['#2a6f8a','#3a84a0','#4a98b5','#5cacc8','#7CC3DC','#a6dcec'],gold:['#7A5414','#A87818','#C8922A','#D9A93A','#F2C763','#FFE39A']};
+    var cols=P[el.getAttribute('data-color')]||P.blue;
     // rodas e faróis primeiro (abaixo/dentro da carroceria)
     h+='<div class="cw" style="left:-6%;top:15%;transform:translateZ(6px)"></div><div class="cw" style="right:-6%;top:15%;transform:translateZ(6px)"></div>';
     h+='<div class="cw" style="left:-6%;top:63%;transform:translateZ(6px)"></div><div class="cw" style="right:-6%;top:63%;transform:translateZ(6px)"></div>';

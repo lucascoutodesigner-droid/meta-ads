@@ -1,0 +1,107 @@
+<template>
+  <link rel="stylesheet" href="assets/tz.css" />
+  <style>
+    #root{position:absolute;inset:0;overflow:hidden;font-family:var(--font);color:#003146}
+    #s5-bgp{position:absolute;inset:0;background:linear-gradient(135deg,#003146 0%,#005166 100%)}
+    #s5-mint{position:absolute;inset:0;background:var(--mint);clip-path:circle(0px at 930px 350px)}
+    #s5-mint-glow{position:absolute;left:-100px;top:1000px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(124,195,220,.35),rgba(124,195,220,0) 70%)}
+    #s5-seal{left:883px;top:292px;width:94px;height:114px}
+    .s5-t{position:absolute;left:88px;width:904px;font-weight:900;letter-spacing:-0.02em;line-height:1.04;color:#003146}
+    #s5-h>span{display:block}
+    #s5-h{top:300px;font-size:92px;width:760px}
+    #s5-s{top:520px;font-size:40px;font-weight:600;line-height:1.25;letter-spacing:0}
+    .card{height:136px;width:740px;border-radius:68px}
+    .card .ic{left:18px;top:18px;width:100px;height:100px}
+    .card .ck{position:absolute;left:24px;top:30px;width:52px;height:52px}
+    .card .lb{position:absolute;left:150px;top:0;height:136px;line-height:136px;font-size:52px;font-weight:800;letter-spacing:-0.01em;color:#003146;white-space:nowrap}
+    #c1{left:88px;top:742px}#c2{left:160px;top:896px}#c3{left:232px;top:1050px}
+    #s5-panel{position:absolute;left:88px;top:340px;width:904px;height:540px;border-radius:56px;opacity:0;
+      background:linear-gradient(135deg,#003146,#005166);box-shadow:0 34px 60px rgba(0,49,70,.35),inset 0 3px 0 rgba(255,255,255,.35)}
+    #s5-14{position:absolute;left:30px;top:30px;font-size:420px;line-height:1;font-weight:900;letter-spacing:-0.06em;--ex:3.4px}
+    #s5-cubes{position:absolute;left:0;top:0;width:904px;height:540px;perspective:900px}
+    .cube{position:absolute;width:64px;height:64px;transform-style:preserve-3d;transform:rotateX(-24deg) rotateY(34deg)}
+    .cube>div{position:absolute;inset:0;border:2px solid rgba(255,255,255,.55);background:linear-gradient(160deg,rgba(255,255,255,.34),rgba(255,255,255,.08))}
+    .cube .f{transform:translateZ(32px)}.cube .b{transform:rotateY(180deg) translateZ(32px)}
+    .cube .r{transform:rotateY(90deg) translateZ(32px)}.cube .l{transform:rotateY(-90deg) translateZ(32px)}
+    .cube .u{transform:rotateX(90deg) translateZ(32px)}.cube .d{transform:rotateX(-90deg) translateZ(32px)}
+    .cube.g>div{border-color:#FFE9A8;background:linear-gradient(160deg,#FFE39A,#D9A93A)}
+    #s5-p1{top:930px;font-size:62px}
+    #s5-p2{top:1022px;font-size:44px;font-weight:600;letter-spacing:0}
+    #s5-wipe{position:absolute;left:-1500px;top:-700px;width:3200px;height:3400px;background:linear-gradient(135deg,#003146 0%,#005166 100%);transform-origin:50% 50%;box-shadow:-20px 0 0 #F2C763}
+  </style>
+  <div id="root" data-composition-id="s5-dica" data-width="1080" data-height="1920">
+    <div id="s5-bgp"></div>
+    <div id="s5-mint"><div id="s5-mint-glow"></div></div>
+    <div id="s5-seal" class="shield3d" data-tz="shield"></div>
+
+    <div id="s5-a">
+      <h1 id="s5-h" class="s5-t"><span id="h1">Seguro não é</span><span id="h2" style="color:#0A6B96">só preço.</span></h1>
+      <p id="s5-s" class="s5-t">Franquia, coberturas e assistência mudam de uma apólice para outra.</p>
+      <div id="c1" class="card glass light"><div class="ic sphere petrol"><div class="ck" data-tz="icon" data-icon="check"></div></div><div class="lb">Franquia</div></div>
+      <div id="c2" class="card glass light"><div class="ic sphere petrol"><div class="ck" data-tz="icon" data-icon="check"></div></div><div class="lb">Coberturas</div></div>
+      <div id="c3" class="card glass light"><div class="ic sphere petrol"><div class="ck" data-tz="icon" data-icon="check"></div></div><div class="lb">Assistência 24h</div></div>
+    </div>
+
+    <div id="s5-b">
+      <div id="s5-panel"><div id="s5-14" class="gold">14</div><div id="s5-cubes"></div></div>
+      <p id="s5-p1" class="s5-t">seguradoras parceiras.</p>
+      <p id="s5-p2" class="s5-t">Um corretor compara por você.</p>
+    </div>
+    <div id="s5-wipe"></div>
+  </div>
+  <script src="assets/components/shield.js"></script>
+  <script src="assets/components/icons.js"></script>
+  <script src="assets/tz-mount.js"></script>
+  <script>
+    (function () {
+      var scope = document.querySelector('[data-composition-id="s5-dica"]');
+      function H(i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+      var cb = scope.querySelector('#s5-cubes');
+      for (var i = 0; i < 14; i++) {
+        var c = document.createElement('div'); c.className = 'cube' + (i === 0 ? ' g' : ''); c.id = 'cube-' + i;
+        c.innerHTML = '<div class="f"></div><div class="b"></div><div class="r"></div><div class="l"></div><div class="u"></div><div class="d"></div>';
+        c.style.left = (560 + (i % 4) * 84) + 'px'; c.style.top = (150 + Math.floor(i / 4) * 92) + 'px';
+        cb.appendChild(c);
+      }
+      TZ.mount(scope);
+      ['h1', 'h2'].forEach(function (id) { TZ.words(scope.querySelector('#' + id)); });
+      var sw = TZ.words(scope.querySelector('#s5-s'));
+      var tl = gsap.timeline({ paused: true });
+
+      // selo (vindo da cena 4) e íris menta
+      tl.fromTo('#s5-seal', { rotationY: -20, y: 0 }, { rotationY: 20, y: -8, duration: 4.4, ease: 'sine.inOut' }, 0);
+      tl.to('#s5-seal', { scale: 0, opacity: 0, duration: 0.35, ease: 'power3.in' }, 4.6);
+      tl.fromTo('#s5-mint', { clipPath: 'circle(0px at 930px 350px)' }, { clipPath: 'circle(2300px at 930px 350px)', duration: 1.1, ease: 'power2.inOut' }, 0.05);
+      tl.fromTo('#s5-mint-glow', { scale: 0.8 }, { scale: 1.3, duration: 9, ease: 'sine.inOut' }, 0);
+
+      // 5a
+      tl.fromTo(scope.querySelectorAll('#s5-h .word'), { y: 60, opacity: 0, rotationX: -55, transformPerspective: 800 }, { y: 0, opacity: 1, rotationX: 0, duration: 0.55, ease: 'back.out(1.6)', stagger: 0.1 }, 0.7);
+      tl.fromTo(sw, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out', stagger: 0.05 }, 1.5);
+      [['#c1', 2.0, -80], ['#c2', 2.5, -80], ['#c3', 3.0, -80]].forEach(function (c, i) {
+        tl.fromTo(c[0], { x: -900, opacity: 0, rotationY: -35, transformPerspective: 1000 }, { x: 0, opacity: 1, rotationY: 0, duration: 0.8, ease: 'back.out(1.4)' }, c[1]);
+        tl.fromTo(c[0] + ' .ic', { scale: 0 }, { scale: 1, duration: 0.5, ease: 'back.out(2.4)' }, c[1] + 0.35);
+        tl.fromTo(c[0] + ' .ck', { scale: 0, rotationZ: -40 }, { scale: 1, rotationZ: 0, duration: 0.4, ease: 'back.out(3)' }, c[1] + 0.6);
+        tl.to(c[0], { y: -8, duration: 0.8, ease: 'sine.inOut', yoyo: true, repeat: 1 }, c[1] + 1.0);
+      });
+      tl.to('#s5-a', { opacity: 0, y: -40, duration: 0.4, ease: 'power3.in' }, 4.6);
+
+      // 5b
+      tl.fromTo('#s5-panel', { opacity: 0, scale: 0.85, rotationX: 20, transformPerspective: 1200 }, { opacity: 1, scale: 1, rotationX: 0, duration: 0.7, ease: 'back.out(1.5)' }, 5.0);
+      tl.fromTo('#s5-14', { scale: 1.3, opacity: 0, transformOrigin: '30% 60%' }, { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.7)' }, 5.2);
+      for (var k = 0; k < 14; k++) {
+        tl.fromTo('#cube-' + k, { x: (H(k) - 0.5) * 700, y: (H(k + 5) - 0.5) * 500 - 150, z: 200 + H(k + 9) * 300, rotationZ: (H(k + 2) - 0.5) * 200, opacity: 0 },
+          { x: 0, y: 0, z: 0, rotationZ: 0, opacity: 1, duration: 0.75, ease: 'back.out(1.3)' }, 5.5 + k * 0.07);
+      }
+      tl.to('#cube-0', { scale: 1.18, duration: 0.3, ease: 'power2.out', yoyo: true, repeat: 1 }, 6.7);
+      tl.to('#s5-cubes', { rotationY: 6, rotationX: -3, duration: 3.5, ease: 'sine.inOut' }, 6.0);
+      tl.fromTo('#s5-p1', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.3);
+      tl.fromTo('#s5-p2', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 6.9);
+      tl.to('#s5-14', { scale: 1.03, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 7.2);
+
+      // wipe diagonal de volta ao petróleo
+      tl.fromTo('#s5-wipe', { x: -3300, rotation: 18 }, { x: 0, rotation: 18, duration: 0.7, ease: 'power3.inOut' }, 9.25);
+      window.__timelines = window.__timelines || {};
+      window.__timelines['s5-dica'] = tl;
+    })();
+  </script>
+</template>

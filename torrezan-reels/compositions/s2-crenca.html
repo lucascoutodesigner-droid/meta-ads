@@ -1,0 +1,100 @@
+<template>
+  <link rel="stylesheet" href="assets/tz.css" />
+  <style>
+    #root{position:absolute;inset:0;overflow:hidden;font-family:var(--font);color:#fff}
+    #s2-bg{position:absolute;inset:0;background:linear-gradient(135deg,#003146 0%,#005166 100%)}
+    #s2-glow{position:absolute;left:90px;top:800px;width:900px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(124,195,220,.30),rgba(124,195,220,0) 66%)}
+    #s2-fog{position:absolute;left:0;top:140px;width:1080px;height:560px;background:linear-gradient(180deg,rgba(0,54,73,0) 0%,rgba(0,54,73,.97) 30%,rgba(0,54,73,.9) 45%,rgba(0,54,73,0) 100%)}
+    #s2-cam{position:absolute;inset:0;perspective:1300px;perspective-origin:50% 32%}
+    #s2-world{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-style:preserve-3d;transform-origin:50% 1080px}
+    #s2-road{position:absolute;left:290px;top:-1800px;width:500px;height:4400px;
+      background:linear-gradient(90deg,#06202d,#0b3347 50%,#06202d);border-left:8px solid #dfeff5;border-right:8px solid #dfeff5}
+    #s2-dash{position:absolute;left:534px;top:-1800px;width:12px;height:4400px;
+      background:repeating-linear-gradient(180deg,#fff 0 70px,transparent 70px 150px)}
+    .s2-post{position:absolute;width:30px;height:30px}
+    #s2-car{left:466px;top:930px;width:148px;height:272px}
+    #s2-lead{position:absolute;left:88px;width:904px;top:292px;font-size:44px;font-weight:600}
+    #s2-bubble{left:110px;top:372px;width:860px;height:350px;border-radius:96px}
+    #s2-bubble-txt{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-size:88px;line-height:1.04;--ex:1px}
+    #s2-bubble-txt span{display:block}
+    #s2-dot1{left:455px;top:742px;width:54px;height:54px;opacity:.85}
+    #s2-dot2{left:500px;top:812px;width:34px;height:34px;opacity:.85}
+    .s2-pt{position:absolute;left:530px;top:520px;width:22px;height:22px;opacity:0}
+  </style>
+  <div id="root" data-composition-id="s2-crenca" data-width="1080" data-height="1920">
+    <div id="s2-bg"></div><div id="s2-glow"></div>
+    <div id="s2-cam"><div id="s2-world">
+      <div id="s2-road"></div><div id="s2-dash"></div>
+      <div id="s2-posts"></div>
+      <div id="s2-car" class="car" data-tz="car"></div>
+    </div></div>
+    <div id="s2-fog"></div>
+    <p id="s2-lead" class="t-support">E quase todo mundo pensa:</p>
+    <div id="s2-bubble" class="glass">
+      <div id="s2-bubble-txt" class="t-title"><span id="s2-b1">“comigo não</span><span id="s2-b2" class="gold">vai acontecer.”</span></div>
+    </div>
+    <div id="s2-dot1" class="sphere ice"></div><div id="s2-dot2" class="sphere ice"></div>
+    <div id="s2-parts"></div>
+  </div>
+  <script src="assets/components/car.js"></script>
+  <script src="assets/tz-mount.js"></script>
+  <script>
+    (function () {
+      var scope = document.querySelector('[data-composition-id="s2-crenca"]');
+      var posts = scope.querySelector('#s2-posts'), parts = scope.querySelector('#s2-parts');
+      function H(i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+      for (var k = 0; k < 10; k++) for (var sd = 0; sd < 2; sd++) {
+        var d = document.createElement('div');
+        d.className = 's2-post sphere gold'; d.id = 's2-post-' + sd + '-' + k;
+        d.style.left = (sd ? 835 : 215) + 'px'; d.style.top = (-1500 + k * 340) + 'px';
+        posts.appendChild(d);
+      }
+      for (var p = 0; p < 16; p++) { var q = document.createElement('div'); q.className = 's2-pt sphere gold'; q.id = 's2-pt-' + p; parts.appendChild(q); }
+      TZ.mount(scope);
+      var words1 = TZ.words(scope.querySelector('#s2-lead'));
+      var tl = gsap.timeline({ paused: true });
+
+      // câmera: travelling lateral + dolly lento
+      tl.fromTo('#s2-world', { rotationX: 66, x: -70, scale: 0.96 }, { rotationX: 62, x: 50, scale: 1.04, duration: 4.4, ease: 'sine.inOut' }, 0);
+      tl.to('#s2-world', { rotationX: 60, scale: 1.06, x: 20, duration: 0.6, ease: 'power2.out' }, 4.4);
+      // estrada em loop: acelera constante e freia no estouro
+      tl.fromTo('#s2-dash', { backgroundPositionY: 0 }, { backgroundPositionY: 1100, duration: 3.9, ease: 'none' }, 0);
+      tl.to('#s2-dash', { backgroundPositionY: 1230, duration: 0.9, ease: 'power3.out' }, 3.9);
+      for (var k2 = 0; k2 < 10; k2++) for (var s2 = 0; s2 < 2; s2++) {
+        tl.fromTo('#s2-post-' + s2 + '-' + k2, { y: 0 }, { y: 1100, duration: 3.9, ease: 'none' }, 0);
+        tl.to('#s2-post-' + s2 + '-' + k2, { y: 1230, duration: 0.9, ease: 'power3.out' }, 3.9);
+      }
+      tl.fromTo('#s2-glow', { scale: 0.9 }, { scale: 1.15, duration: 5, ease: 'sine.inOut' }, 0);
+      // carro: balanço leve, depois freia (cabeceia)
+      tl.fromTo('#s2-car', { rotationZ: -1.5, y: 0 }, { rotationZ: 1.5, y: -6, duration: 1.1, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0);
+      tl.to('#s2-car', { rotationX: -14, y: 14, duration: 0.25, ease: 'power3.out', overwrite: 'auto' }, 3.95);
+      tl.to('#s2-car', { rotationX: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.5)', overwrite: 'auto' }, 4.2);
+
+      // texto
+      tl.fromTo(words1, { y: 40, opacity: 0, rotationX: -50, transformPerspective: 800 }, { y: 0, opacity: 1, rotationX: 0, duration: 0.5, ease: 'back.out(1.7)', stagger: 0.09 }, 0.15);
+      tl.fromTo('#s2-bubble', { scale: 0.2, opacity: 0, y: 120, transformOrigin: '50% 100%' }, { scale: 1, opacity: 1, y: 0, duration: 0.8, ease: 'back.out(1.5)' }, 1.0);
+      tl.fromTo('#s2-dot1', { scale: 0 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' }, 1.0);
+      tl.fromTo('#s2-dot2', { scale: 0 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' }, 1.15);
+      tl.fromTo('#s2-b1', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'back.out(1.7)' }, 1.45);
+      tl.fromTo('#s2-b2', { y: 30, opacity: 0, scale: 1.2 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 1.85);
+      // balão balança
+      tl.fromTo('#s2-bubble', { rotationZ: -1.2 }, { rotationZ: 1.2, duration: 0.9, ease: 'sine.inOut', yoyo: true, repeat: 2 }, 1.9);
+      tl.to('#s2-dot1', { y: 6, duration: 0.7, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 1.5);
+      tl.to('#s2-dot2', { y: -5, duration: 0.6, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 1.5);
+      // balão estoura em partículas douradas
+      tl.to('#s2-bubble', { scale: 1.12, duration: 0.14, ease: 'power2.out' }, 3.86);
+      tl.to('#s2-bubble', { scale: 1.3, opacity: 0, duration: 0.22, ease: 'power3.in' }, 4.0);
+      tl.to('#s2-dot1, #s2-dot2', { scale: 0, opacity: 0, duration: 0.2, ease: 'power2.in' }, 3.9);
+      for (var pi = 0; pi < 16; pi++) {
+        var ang = (pi / 16) * Math.PI * 2 + H(pi) * 0.4, dist = 180 + H(pi + 9) * 260;
+        var px = (H(pi + 3) - 0.5) * 520, py = (H(pi + 5) - 0.5) * 120;
+        tl.fromTo('#s2-pt-' + pi, { x: px, y: py, scale: 0.4, opacity: 1 },
+          { x: px + Math.cos(ang) * dist, y: py + Math.sin(ang) * dist * 0.7 + 60, scale: 0.9 + H(pi + 1) * 0.8, opacity: 0, duration: 0.8, ease: 'power3.out' }, 3.95);
+      }
+      // saída
+      tl.to('#s2-lead', { y: -40, opacity: 0, duration: 0.35, ease: 'power3.in' }, 4.55);
+      window.__timelines = window.__timelines || {};
+      window.__timelines['s2-crenca'] = tl;
+    })();
+  </script>
+</template>

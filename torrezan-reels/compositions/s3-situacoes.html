@@ -1,0 +1,191 @@
+<template>
+  <link rel="stylesheet" href="assets/tz.css" />
+  <style>
+    #root{position:absolute;inset:0;overflow:hidden;font-family:var(--font);color:#fff}
+    #s3-bg{position:absolute;inset:0;background:linear-gradient(135deg,#003146 0%,#005166 100%)}
+    #s3-night{position:absolute;inset:0;background:linear-gradient(180deg,#010b12 0%,#02151f 60%,#031c29 100%);opacity:0}
+    #s3-glow{position:absolute;left:90px;top:760px;width:900px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(124,195,220,.26),rgba(124,195,220,0) 66%)}
+    .s3-cam{position:absolute;inset:0;perspective:1400px;perspective-origin:50% 25%}
+    .s3-world{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-style:preserve-3d;transform-origin:50% 900px}
+    .s3-grp{position:absolute;inset:0;opacity:0}
+    .s3-t{position:absolute;left:96px;width:888px;font-size:86px;font-weight:900;letter-spacing:-0.02em;line-height:1.04}
+    .s3-t>span{display:block}
+    #s3-count{left:370px;top:280px;width:340px;height:58px;border-radius:29px;font-size:28px;font-weight:800;letter-spacing:3px;display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap}
+    #s3-count b{font-weight:800;color:rgba(255,255,255,.5)}
+    .road{position:absolute;background:linear-gradient(90deg,#06202d,#0b3347 50%,#06202d);border-left:7px solid #dfeff5;border-right:7px solid #dfeff5}
+    .car-s{width:128px;height:236px}
+    /* 3a */
+    #a-road{left:130px;top:360px;width:340px;height:1500px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 22%);mask-image:linear-gradient(180deg,transparent 0,#000 22%)}
+    #a-carB{left:236px;top:690px}
+    #a-carA{left:236px;top:944px}
+    #a-dent{position:absolute;left:34px;bottom:6px;width:60px;height:24px;border-radius:50%;border-bottom:6px solid rgba(0,14,22,.75);box-shadow:0 8px 0 -2px rgba(255,255,255,.25);opacity:0;transform-origin:50% 100%}
+    #a-ring{position:absolute;left:270px;top:915px;width:60px;height:60px;border-radius:50%;border:6px solid #BFE6F2;opacity:0}
+    #a-paper{position:absolute;left:600px;top:660px;width:392px;height:560px;border-radius:26px;clip-path:inset(0 0 100% 0 round 26px)}
+    #a-paper .row{position:absolute;left:34px;right:34px;height:30px;opacity:0}
+    #a-paper .row i{position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#FFE39A,#D9A93A);box-shadow:0 3px 0 #A87818}
+    #a-paper .row u{position:absolute;left:46px;top:7px;height:16px;border-radius:8px;background:rgba(0,49,70,.22)}
+    #a-roll{opacity:0;position:absolute;left:576px;top:650px;width:440px;height:34px;border-radius:17px;background:linear-gradient(180deg,#ffffff,#cfe3ea 55%,#8fb6c4);box-shadow:0 10px 18px rgba(0,16,26,.4)}
+    /* 3b */
+    #b-slot{position:absolute;left:380px;top:640px;width:320px;height:520px;border:6px dashed rgba(223,239,245,.85);border-radius:16px}
+    #b-ln1,#b-ln2{position:absolute;top:640px;width:6px;height:520px;background:rgba(223,239,245,.6)}
+    #b-ln1{left:270px}#b-ln2{left:810px}
+    #b-floor{position:absolute;left:180px;top:560px;width:720px;height:700px;border-radius:24px;background:linear-gradient(180deg,#0a3b52,#07293a)}
+    #b-car{left:476px;top:828px}
+    .b-pt{position:absolute;left:530px;top:900px;width:20px;height:20px;opacity:0}
+    /* 3c */
+    #c-road{left:150px;top:-300px;width:420px;height:2200px}
+    #c-dash{position:absolute;left:354px;top:-300px;width:12px;height:2200px;background:repeating-linear-gradient(180deg,rgba(255,255,255,.8) 0 60px,transparent 60px 140px)}
+    #c-fog{position:absolute;left:0;top:-300px;width:1080px;height:760px;background:linear-gradient(180deg,#010b12 15%,rgba(1,11,18,0))}
+    #c-car{left:680px;top:760px}
+    .hz{position:absolute;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,#fff6d0 0,#FFB020 38%,rgba(255,150,0,0) 70%);transform-style:flat;opacity:0}
+    #c-wash{position:absolute;left:560px;top:690px;width:380px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,166,30,.55),rgba(255,166,30,0) 70%);opacity:0}
+    .star{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;opacity:0}
+    #s3-beam{position:absolute;left:380px;top:0;width:320px;height:1200px;opacity:0;transform-origin:50% 0;
+      background:linear-gradient(180deg,rgba(255,244,200,1) 0%,rgba(242,199,99,.78) 40%,rgba(242,199,99,0) 100%);
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 35%,#000 65%,transparent);mask-image:linear-gradient(90deg,transparent,#000 35%,#000 65%,transparent)}
+  </style>
+  <div id="root" data-composition-id="s3-situacoes" data-width="1080" data-height="1920">
+    <div id="s3-bg"></div><div id="s3-night"></div><div id="s3-glow"></div>
+
+    <!-- 3a: batida leve -->
+    <div id="s3-a" class="s3-grp">
+      <div class="s3-cam"><div class="s3-world" id="a-world">
+        <div id="a-road" class="road"></div>
+        <div id="a-carB" class="car car-s" data-tz="car"><div id="a-dent"></div></div>
+        <div id="a-carA" class="car car-s" data-tz="car" data-color="ice"></div>
+        <div id="a-ring"></div>
+      </div></div>
+      <div id="a-roll"></div>
+      <div id="a-paper" class="glass light">
+        <div class="row" style="top:44px"><i></i><u style="width:200px"></u></div>
+        <div class="row" style="top:100px"><i></i><u style="width:150px"></u></div>
+        <div class="row" style="top:156px"><i></i><u style="width:230px"></u></div>
+        <div class="row" style="top:212px"><i></i><u style="width:170px"></u></div>
+        <div class="row" style="top:268px"><i></i><u style="width:210px"></u></div>
+        <div class="row" style="top:324px"><i></i><u style="width:120px"></u></div>
+        <div class="row" style="top:380px"><i></i><u style="width:190px"></u></div>
+        <div class="row" style="top:436px"><i></i><u style="width:240px"></u></div>
+        <div class="row" style="top:492px"><i></i><u style="width:140px"></u></div>
+      </div>
+      <div id="a-title" class="s3-t" style="top:372px"><span id="a-t1">Uma batida leve</span><span id="a-t2">no trânsito…</span></div>
+    </div>
+
+    <!-- 3b: roubo ou furto -->
+    <div id="s3-b" class="s3-grp">
+      <div class="s3-cam"><div class="s3-world" id="b-world">
+        <div id="b-floor"></div><div id="b-ln1"></div><div id="b-ln2"></div><div id="b-slot"></div>
+        <div id="b-car" class="car car-s" data-tz="car"></div>
+        <div id="b-parts"></div>
+      </div></div>
+      <div id="b-title" class="s3-t" style="top:372px"><span id="b-t1">O carro que some</span><span id="b-t2">da vaga…</span></div>
+    </div>
+
+    <!-- 3c: pane na estrada -->
+    <div id="s3-c" class="s3-grp">
+      <div id="c-stars"></div>
+      <div class="s3-cam"><div class="s3-world" id="c-world">
+        <div id="c-road" class="road" style="border-color:rgba(223,239,245,.55)"></div><div id="c-dash"></div><div id="c-fog"></div>
+        <div id="c-wash"></div>
+        <div id="c-car" class="car car-s" data-tz="car"></div>
+      </div></div>
+      <div id="c-hz"></div>
+      <div id="c-title" class="s3-t" style="top:372px"><span id="c-t1">Uma pane à noite,</span><span id="c-t2">longe de casa.</span></div>
+      <div id="c-close" class="s3-t" style="top:1030px;font-size:64px"><span id="c-k1">Sem seguro, a conta é</span><span id="c-k2" class="gold" style="--ex:1.2px;font-size:104px">toda sua.</span></div>
+    </div>
+
+    <div id="s3-count" class="glass"><b id="n1">01</b> <b>/</b> <b id="n2">02</b> <b>/</b> <b id="n3">03</b></div>
+    <div id="s3-beam"></div>
+  </div>
+  <script src="assets/components/car.js"></script>
+  <script src="assets/tz-mount.js"></script>
+  <script>
+    (function () {
+      var scope = document.querySelector('[data-composition-id="s3-situacoes"]');
+      function H(i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+      var bp = scope.querySelector('#b-parts');
+      for (var p = 0; p < 26; p++) { var q = document.createElement('div'); q.className = 'b-pt sphere ' + (p % 3 ? 'ice' : 'gold'); q.id = 'b-pt-' + p; bp.appendChild(q); }
+      var stars = scope.querySelector('#c-stars');
+      for (var s = 0; s < 22; s++) { var st = document.createElement('div'); st.className = 'star'; st.id = 'st-' + s; st.style.left = (H(s) * 1040 + 20) + 'px'; st.style.top = (H(s + 40) * 520 + 10) + 'px'; stars.appendChild(st); }
+      var hz = scope.querySelector('#c-hz');
+      [[690, 770], [800, 770], [690, 1010], [800, 1010]].forEach(function (c, i) { var h = document.createElement('div'); h.className = 'hz'; h.id = 'hz-' + i; h.style.left = c[0] + 'px'; h.style.top = c[1] + 'px'; hz.appendChild(h); });
+      TZ.mount(scope);
+      ['#a-title', '#b-title', '#c-title', '#c-close'].forEach(function (id) { scope.querySelectorAll(id + ' span').forEach(function (el) { TZ.words(el); }); });
+      var W = function (sel) { return scope.querySelectorAll(sel + ' .word'); };
+      var tl = gsap.timeline({ paused: true });
+      var IN = function (sel, at, d) { tl.fromTo(W(sel), { y: 46, opacity: 0, rotationX: -55, transformPerspective: 800 }, { y: 0, opacity: 1, rotationX: 0, duration: 0.5, ease: 'back.out(1.6)', stagger: 0.09 }, at); };
+      var OUT = function (sel, at) { tl.to(sel, { y: -40, opacity: 0, duration: 0.3, ease: 'power3.in' }, at); };
+      var cnt = function (n, at) {
+        ['#n1', '#n2', '#n3'].forEach(function (id, i) { tl.to(id, { color: i + 1 === n ? '#F2C763' : 'rgba(255,255,255,0.5)', scale: i + 1 === n ? 1.18 : 1, duration: 0.25, ease: 'back.out(2)' }, at); });
+      };
+      // contador (pílula de vidro no topo da zona segura)
+      tl.fromTo('#s3-count', { y: -30, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.8)' }, 0.1);
+      cnt(1, 0.1); cnt(2, 4.0); cnt(3, 8.0);
+      // fundo
+      tl.fromTo('#s3-glow', { scale: 0.9 }, { scale: 1.2, duration: 13, ease: 'sine.inOut' }, 0);
+      tl.to('#s3-night', { opacity: 1, duration: 0.9, ease: 'power2.inOut' }, 7.8);
+      tl.to('#s3-glow', { opacity: 0, duration: 0.8 }, 8.0);
+
+      /* ---- 3a: 0–4 ---- */
+      tl.fromTo('#s3-a', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0);
+      tl.fromTo('#a-world', { rotationX: 56, scale: 0.94, x: -30 }, { rotationX: 52, scale: 1.08, x: 20, duration: 4, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#a-carA', { y: 180 }, { y: 0, duration: 1.45, ease: 'power2.inOut' }, 0.5);
+      tl.fromTo('#a-carA', { x: 0 }, { x: 0, duration: 0.01 }, 0);
+      // impacto
+      tl.to('#a-carB', { y: -16, rotationZ: 3.5, duration: 0.18, ease: 'power3.out' }, 1.95);
+      tl.to('#a-carB', { y: -6, rotationZ: 0, duration: 0.7, ease: 'elastic.out(1,0.45)' }, 2.13);
+      tl.to('#a-carA', { y: -8, duration: 0.16, ease: 'power3.out', overwrite: 'auto' }, 1.95);
+      tl.to('#a-carA', { y: 10, duration: 0.5, ease: 'power2.out' }, 2.11);
+      tl.fromTo('#a-ring', { scale: 0.4, opacity: 0.95 }, { scale: 3.2, opacity: 0, duration: 0.7, ease: 'power2.out' }, 1.97);
+      tl.fromTo('#a-dent', { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 2.0);
+      IN('#a-title', 0.4);
+      // orçamento desenrolando
+      tl.to('#a-roll', { opacity: 1, duration: 0.2 }, 2.35);
+      tl.fromTo('#a-paper', { clipPath: 'inset(0px 0px 100% 0px round 26px)' }, { clipPath: 'inset(0px 0px 0% 0px round 26px)', duration: 1.4, ease: 'power2.inOut' }, 2.4);
+      tl.fromTo('#a-roll', { y: 0 }, { y: 560, duration: 1.4, ease: 'power2.inOut' }, 2.4);
+      tl.to('#a-roll', { opacity: 0, duration: 0.25 }, 3.7);
+      scope.querySelectorAll('#a-paper .row').forEach(function (r, i) {
+        tl.fromTo(r, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out' }, 2.55 + i * 0.14);
+      });
+      OUT('#a-title', 3.7); tl.to('#a-paper', { opacity: 0, y: -30, duration: 0.3, ease: 'power3.in' }, 3.7);
+      tl.to('#s3-a', { opacity: 0, duration: 0.25 }, 3.85);
+
+      /* ---- 3b: 4–8 ---- */
+      tl.fromTo('#s3-b', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.8);
+      tl.fromTo('#b-world', { rotationX: 58, scale: 0.94, y: 30 }, { rotationX: 54, scale: 1.1, y: 0, duration: 4.2, ease: 'sine.inOut' }, 3.8);
+      tl.fromTo('#b-car', { z: 260, opacity: 0 }, { z: 0, opacity: 1, duration: 0.8, ease: 'bounce.out' }, 3.85);
+      IN('#b-title', 4.05);
+      tl.fromTo('#b-slot', { borderColor: 'rgba(223,239,245,0.85)' }, { borderColor: 'rgba(242,199,99,1)', duration: 0.4, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 5.3);
+      // o carro se desfaz em partículas
+      var car = scope.querySelector('#b-car');
+      tl.to(car.querySelector('.c-solid'), { opacity: 0, scale: 0.92, duration: 0.9, ease: 'power2.in' }, 5.6);
+      tl.to(car.querySelector('.c-shadow'), { opacity: 0, duration: 0.6 }, 5.7);
+      tl.to(car.querySelector('.c-line'), { opacity: 1, duration: 0.5 }, 5.9);
+      for (var pi = 0; pi < 26; pi++) {
+        var bx = (H(pi) - 0.5) * 110, by = (H(pi + 7) - 0.5) * 200 + 100;
+        tl.fromTo('#b-pt-' + pi, { x: bx, y: by, z: 20, scale: 0.8 + H(pi + 2), opacity: 0 }, { opacity: 1, duration: 0.15 }, 5.6 + H(pi + 3) * 0.3);
+        tl.to('#b-pt-' + pi, { x: bx + (H(pi + 11) - 0.5) * 260, y: by - 120 - H(pi + 13) * 240, z: 120 + H(pi + 17) * 260, opacity: 0, duration: 1.1, ease: 'power2.out' }, 5.75 + H(pi + 3) * 0.3);
+      }
+      tl.fromTo(car.querySelector('.c-line'), { borderColor: 'rgba(124,195,220,0.55)' }, { borderColor: 'rgba(242,199,99,0.95)', duration: 0.45, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 6.4);
+      OUT('#b-title', 7.7);
+      tl.to('#s3-b', { opacity: 0, duration: 0.3 }, 7.9);
+
+      /* ---- 3c: 8–13 ---- */
+      tl.fromTo('#s3-c', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 7.75);
+      for (var si = 0; si < 22; si++) tl.fromTo('#st-' + si, { opacity: 0 }, { opacity: 0.35 + H(si + 5) * 0.55, duration: 0.8, ease: 'power1.out' }, 8.3 + H(si) * 0.8);
+      tl.fromTo('#c-world', { rotationX: 70, scale: 0.96, x: 20 }, { rotationX: 66, scale: 1.08, x: -20, duration: 5, ease: 'sine.inOut' }, 8.0);
+      tl.fromTo('#c-car', { x: 90, opacity: 0, rotationZ: 6 }, { x: 0, opacity: 1, rotationZ: 0, duration: 0.7, ease: 'back.out(1.4)' }, 7.95);
+      IN('#c-title', 8.15);
+      // pisca-alerta âmbar pulsando em sincronia
+      for (var hi = 0; hi < 4; hi++) tl.fromTo('#hz-' + hi, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.5, duration: 0.3, ease: 'power2.out', yoyo: true, repeat: 9 }, 9.2);
+      tl.fromTo('#c-wash', { opacity: 0 }, { opacity: 0.9, duration: 0.3, ease: 'power2.out', yoyo: true, repeat: 9 }, 9.2);
+      IN('#c-close', 10.3);
+      tl.fromTo('#c-k2', { scale: 1.0 }, { scale: 1.06, duration: 0.5, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 11.2);
+      // feixe de luz dourada (o escudo chegando)
+      tl.fromTo('#s3-beam', { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.7, ease: 'power3.in' }, 12.2);
+      tl.to('#s3-beam', { scaleX: 1.5, duration: 0.3, ease: 'power2.out' }, 12.7);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['s3-situacoes'] = tl;
+    })();
+  </script>
+</template>

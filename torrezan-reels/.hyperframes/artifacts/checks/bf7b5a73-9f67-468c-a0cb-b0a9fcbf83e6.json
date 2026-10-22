@@ -1,0 +1,1013 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 7
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 4,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "GSAP target  not found. https://gsap.com",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "55",
+          "data-width": "1080",
+          "data-height": "1920"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 0,
+        "url": "http://127.0.0.1:41807/",
+        "line": 69
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "GSAP target  not found. https://gsap.com",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "55",
+          "data-width": "1080",
+          "data-height": "1920"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 0,
+        "url": "http://127.0.0.1:41807/",
+        "line": 69
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "GSAP target  not found. https://gsap.com",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "55",
+          "data-width": "1080",
+          "data-height": "1920"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 15.278,
+        "url": "http://127.0.0.1:41807/",
+        "line": 69
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "GSAP target  not found. https://gsap.com",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "55",
+          "data-width": "1080",
+          "data-height": "1920"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 21.389,
+        "url": "http://127.0.0.1:41807/",
+        "line": 69
+      }
+    ]
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 14,
+    "findings": [
+      {
+        "code": "container_overflow",
+        "severity": "warning",
+        "time": 27.5,
+        "selector": "#s4-sph-c",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 880,
+          "top": 1390.93,
+          "right": 1140,
+          "bottom": 1650.93,
+          "width": 260,
+          "height": 260
+        },
+        "containerSelector": "#s4-seguro > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 60
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s4-seguro.html",
+        "bbox": {
+          "x": 880,
+          "y": 1390.93,
+          "width": 260,
+          "height": 260
+        },
+        "firstSeen": 27.5,
+        "lastSeen": 33.611,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          27.5,
+          33.611
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "warning",
+        "time": 39.722,
+        "selector": "#s5-wipe",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -5247.02,
+          "top": -1111.22,
+          "right": -1152.98,
+          "bottom": 3111.22,
+          "width": 4094.04,
+          "height": 4222.45
+        },
+        "containerSelector": "#s5-dica > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 5247.02,
+          "top": 1111.22,
+          "bottom": 1191.22
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s5-dica.html",
+        "bbox": {
+          "x": -5247.02,
+          "y": -1111.22,
+          "width": 4094.04,
+          "height": 4222.45
+        },
+        "firstSeen": 39.722,
+        "lastSeen": 45.833,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          39.722,
+          45.833
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 3.056,
+        "selector": "#s1-sph-a",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 865.49,
+          "top": 1292.36,
+          "right": 1085.49,
+          "bottom": 1512.36,
+          "width": 220,
+          "height": 220
+        },
+        "containerSelector": "#s1-hook > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 5.49
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1-hook.html",
+        "bbox": {
+          "x": 865.49,
+          "y": 1292.36,
+          "width": 220,
+          "height": 220
+        },
+        "firstSeen": 3.056,
+        "lastSeen": 3.056,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          3.056
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 3.056,
+        "selector": "#s1-sph-b",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -60,
+          "top": 1410.39,
+          "right": 110,
+          "bottom": 1580.39,
+          "width": 170,
+          "height": 170
+        },
+        "containerSelector": "#s1-hook > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 60
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1-hook.html",
+        "bbox": {
+          "x": -60,
+          "y": 1410.39,
+          "width": 170,
+          "height": 170
+        },
+        "firstSeen": 3.056,
+        "lastSeen": 3.056,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          3.056
+        ]
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 3.056,
+        "selector": "#s1-sph-b",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -60,
+          "top": 1410.39,
+          "right": 110,
+          "bottom": 1580.39,
+          "width": 170,
+          "height": 170
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 60
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1-hook.html",
+        "bbox": {
+          "x": -60,
+          "y": 1410.39,
+          "width": 170,
+          "height": 170
+        },
+        "firstSeen": 3.056,
+        "lastSeen": 3.056,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          3.056
+        ]
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 9.167,
+        "selector": "#a-road",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -352.65,
+          "top": 584.44,
+          "right": 466.48,
+          "bottom": 2467.92,
+          "width": 819.13,
+          "height": 1883.48
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 352.65,
+          "bottom": 547.92
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3-situacoes.html",
+        "bbox": {
+          "x": -352.65,
+          "y": 584.44,
+          "width": 819.13,
+          "height": 1883.48
+        },
+        "firstSeen": 9.167,
+        "lastSeen": 9.167,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          9.167
+        ]
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 15.278,
+        "selector": "#b-world",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": -944.94,
+          "top": 418.43,
+          "right": 2024.94,
+          "bottom": 3211,
+          "width": 2969.88,
+          "height": 2792.56
+        },
+        "containerSelector": "#s3-b > div:nth-of-type(1)",
+        "text": "",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3-situacoes.html",
+        "bbox": {
+          "x": -944.94,
+          "y": 418.43,
+          "width": 2969.88,
+          "height": 2792.56
+        },
+        "firstSeen": 15.278,
+        "lastSeen": 15.278,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          15.278
+        ]
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 21.389,
+        "selector": "#c-world",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": -1573.73,
+          "top": 497.64,
+          "right": 2523.63,
+          "bottom": 3526.15,
+          "width": 4097.37,
+          "height": 3028.51
+        },
+        "containerSelector": "#s3-c > div:nth-of-type(2)",
+        "text": "",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3-situacoes.html",
+        "bbox": {
+          "x": -1573.73,
+          "y": 497.64,
+          "width": 4097.37,
+          "height": 3028.51
+        },
+        "firstSeen": 21.389,
+        "lastSeen": 21.389,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          21.389
+        ]
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 21.389,
+        "selector": "#c-dash",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -194.31,
+          "top": 424.86,
+          "right": 428.48,
+          "bottom": 3353.05,
+          "width": 622.78,
+          "height": 2928.19
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 194.31,
+          "bottom": 1433.05
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3-situacoes.html",
+        "bbox": {
+          "x": -194.31,
+          "y": 424.86,
+          "width": 622.78,
+          "height": 2928.19
+        },
+        "firstSeen": 21.389,
+        "lastSeen": 21.389,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          21.389
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 27.5,
+        "selector": "#s4-sph-a",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -96.78,
+          "top": 428.28,
+          "right": 143.22,
+          "bottom": 668.28,
+          "width": 240,
+          "height": 240
+        },
+        "containerSelector": "#s4-seguro > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 96.78
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s4-seguro.html",
+        "bbox": {
+          "x": -96.78,
+          "y": 428.28,
+          "width": 240,
+          "height": 240
+        },
+        "firstSeen": 27.5,
+        "lastSeen": 33.611,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          27.5,
+          33.611
+        ]
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 27.5,
+        "selector": "#s4-sph-a",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -96.78,
+          "top": 428.28,
+          "right": 143.22,
+          "bottom": 668.28,
+          "width": 240,
+          "height": 240
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 96.78
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s4-seguro.html",
+        "bbox": {
+          "x": -96.78,
+          "y": 428.28,
+          "width": 240,
+          "height": 240
+        },
+        "firstSeen": 27.5,
+        "lastSeen": 33.611,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          27.5,
+          33.611
+        ]
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 27.5,
+        "selector": "#s4-sph-c",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 880,
+          "top": 1390.93,
+          "right": 1140,
+          "bottom": 1650.93,
+          "width": 260,
+          "height": 260
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 60
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s4-seguro.html",
+        "bbox": {
+          "x": 880,
+          "y": 1390.93,
+          "width": 260,
+          "height": 260
+        },
+        "firstSeen": 27.5,
+        "lastSeen": 33.611,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          27.5,
+          33.611
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 51.944,
+        "selector": "#s6-sph-a",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -70.17,
+          "top": 346.3,
+          "right": 159.83,
+          "bottom": 576.3,
+          "width": 230,
+          "height": 230
+        },
+        "containerSelector": "#root > div:nth-of-type(6) > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 70.17
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s6-cta.html",
+        "bbox": {
+          "x": -70.17,
+          "y": 346.3,
+          "width": 230,
+          "height": 230
+        },
+        "firstSeen": 51.944,
+        "lastSeen": 51.944,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          51.944
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 51.944,
+        "selector": "#s6-sheen",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 1011.85,
+          "top": 954,
+          "right": 1172.15,
+          "bottom": 1078,
+          "width": 160.29,
+          "height": 124
+        },
+        "containerSelector": "#s6-cta-clip",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 132,
+          "top": 954,
+          "right": 948,
+          "bottom": 1074,
+          "width": 816,
+          "height": 120
+        },
+        "overflow": {
+          "right": 224.15,
+          "bottom": 4
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s6-cta.html",
+        "bbox": {
+          "x": 1011.85,
+          "y": 954,
+          "width": 160.29,
+          "height": 124
+        },
+        "firstSeen": 51.944,
+        "lastSeen": 51.944,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          51.944
+        ]
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 51.944,
+        "selector": "#s6-sheen",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": 1011.85,
+          "top": 954,
+          "right": 1172.15,
+          "bottom": 1078,
+          "width": 160.29,
+          "height": 124
+        },
+        "containerSelector": "#s6-cta-clip",
+        "text": "",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 132,
+          "top": 954,
+          "right": 948,
+          "bottom": 1074,
+          "width": 816,
+          "height": 120
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s6-cta.html",
+        "bbox": {
+          "x": 1011.85,
+          "y": 954,
+          "width": 160.29,
+          "height": 124
+        },
+        "firstSeen": 51.944,
+        "lastSeen": 51.944,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          51.944
+        ]
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 51.944,
+        "selector": "#s6-sph-a",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -70.17,
+          "top": 346.3,
+          "right": 159.83,
+          "bottom": 576.3,
+          "width": 230,
+          "height": 230
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 70.17
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s6-cta.html",
+        "bbox": {
+          "x": -70.17,
+          "y": 346.3,
+          "width": 230,
+          "height": 230
+        },
+        "firstSeen": 51.944,
+        "lastSeen": 51.944,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          51.944
+        ]
+      }
+    ],
+    "duration": 55,
+    "samples": [
+      3.056,
+      9.167,
+      15.278,
+      21.389,
+      27.5,
+      33.611,
+      39.722,
+      45.833,
+      51.944
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 16,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 1.63:1; WCAG AA requires 3:1.",
+        "text": "7",
+        "fg": "rgb(242,199,99)",
+        "bg": "rgb(150,169,58)",
+        "ratio": 1.63,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(96,79,39)",
+        "large": true,
+        "selector": "#s1-seven",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1-hook.html",
+        "bbox": {
+          "x": 83.45549774169922,
+          "y": 340.1999816894531,
+          "width": 243.81500244140625,
+          "height": 403.0000305175781
+        },
+        "time": 3.056,
+        "times": [
+          3.056
+        ]
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      3.056,
+      15.278,
+      27.5,
+      39.722,
+      51.944
+    ],
+    "checked": 41,
+    "passed": 40
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 4,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "line_unread",
+        "severity": "warning",
+        "message": "\"DADO CNSEG 2026\" (3 words) is on screen 0.10 s (±0.01 s), under its 1.05 s floor: hold it about 0.5 s + 0.3 s a word (1.40 s here) before it leaves or changes; see references/motion.md.",
+        "text": "DADO CNSEG 2026",
+        "selector": "#s1-label",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1-hook.html",
+        "bbox": {
+          "x": 104.59,
+          "y": 285.8,
+          "width": 307.97,
+          "height": 31.319999999999993
+        },
+        "time": 0,
+        "words": 3,
+        "seconds": 0.098,
+        "floorSeconds": 1.05
+      },
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and \"DADO CNSEG 2026\" renders at 24 px for 3.75 s: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "DADO CNSEG 2026",
+        "selector": "#s1-label",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1-hook.html",
+        "bbox": {
+          "x": 104.59,
+          "y": 285.8,
+          "width": 307.97,
+          "height": 31.32
+        },
+        "time": 0,
+        "times": [
+          0
+        ],
+        "fontPx": 24,
+        "floorPx": 28,
+        "seconds": 3.75,
+        "elements": [
+          {
+            "selector": "#s1-label",
+            "text": "DADO CNSEG 2026",
+            "fontPx": 24,
+            "time": 0,
+            "seconds": 3.75
+          }
+        ]
+      },
+      {
+        "code": "film_silent",
+        "severity": "warning",
+        "message": "This 55 s film has no sound source (no <audio>, no <video> with sound): add a music bed and sounds on the visible actions unless the person asked for silence; see references/sound.md.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0
+      },
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 2 text elements stay under it for 0.5 s or more, the smallest \"TORREZAN\" at 24 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "TORREZAN",
+        "selector": "#s6-wm",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s6-cta.html",
+        "bbox": {
+          "x": 358.56,
+          "y": 1212.15,
+          "width": 195.07,
+          "height": 29
+        },
+        "time": 52.125,
+        "times": [
+          52.125,
+          52.125
+        ],
+        "fontPx": 24,
+        "floorPx": 28,
+        "seconds": 2.875,
+        "elements": [
+          {
+            "selector": "#s6-wm",
+            "text": "TORREZAN",
+            "fontPx": 24,
+            "time": 52.125,
+            "seconds": 2.875
+          },
+          {
+            "selector": "#s6-wm > i:nth-of-type(1)",
+            "text": "SEGUROS",
+            "fontPx": 24,
+            "time": 52.125,
+            "seconds": 2.875
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 440
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}
