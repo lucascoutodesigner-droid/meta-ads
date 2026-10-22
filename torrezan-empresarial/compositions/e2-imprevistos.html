@@ -1,0 +1,166 @@
+<template>
+  <link rel="stylesheet" href="assets/tz.css" />
+  <style>
+    #root{position:absolute;inset:0;overflow:hidden;font-family:var(--font);color:#fff}
+    #e2-bg{position:absolute;inset:0;background:linear-gradient(135deg,#003146 0%,#005166 100%)}
+    #e2-night{position:absolute;inset:0;background:linear-gradient(180deg,#010b12,#02151f 70%,#031c29);opacity:0}
+    #e2-glow{position:absolute;left:100px;top:760px;width:880px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(124,195,220,.26),rgba(124,195,220,0) 66%)}
+    #e2-cam{position:absolute;inset:0;perspective:1600px;perspective-origin:50% 40%}
+    #e2-shop{left:540px;top:960px}
+    .e2-t{position:absolute;left:96px;width:888px;top:372px;font-size:76px;font-weight:900;letter-spacing:-0.02em;line-height:1.05}
+    .e2-t>span{display:block}
+    #e2-count{left:370px;top:280px;width:340px;height:58px;border-radius:29px;font-size:28px;font-weight:800;letter-spacing:3px;display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap}
+    #e2-count b{font-weight:800;color:rgba(255,255,255,.5)}
+    #e2-bolt{position:absolute;left:480px;top:520px;width:120px;height:160px;opacity:0}
+    #e2-flash{position:absolute;inset:0;background:#fff;opacity:0}
+    .e2-sp{position:absolute;left:530px;top:760px;width:16px;height:16px;opacity:0}
+    #e2-clouds{position:absolute;left:0;top:0;opacity:0}
+    .cl{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#b8dcea 50%,#6fa9c2);box-shadow:0 20px 30px rgba(0,16,26,.4)}
+    .dp{position:absolute;width:5px;height:44px;border-radius:3px;background:linear-gradient(180deg,rgba(190,230,245,0),#BFE6F2);opacity:0}
+    #e2-water{position:absolute;left:210px;top:1150px;width:660px;height:150px;border-radius:50%;background:radial-gradient(ellipse,rgba(124,195,220,.7),rgba(124,195,220,.15) 70%,rgba(124,195,220,0));opacity:0}
+    .gearw{position:absolute;opacity:0}
+    .gearw svg{width:100%;height:100%;overflow:visible}
+    #e2-g1{left:110px;top:640px;width:250px;height:250px}
+    #e2-g2{left:690px;top:600px;width:170px;height:170px}
+    .bill{position:absolute;width:150px;height:190px;border-radius:18px;opacity:0}
+    .bill i{position:absolute;left:18px;height:12px;border-radius:6px;background:rgba(0,49,70,.25)}
+    #e2-k{position:absolute;left:96px;width:888px;top:372px;font-size:62px;font-weight:900;letter-spacing:-0.02em;line-height:1.05}
+    #e2-k>span{display:block}
+  </style>
+  <div id="root" data-composition-id="e2-imprevistos" data-width="1080" data-height="1920">
+    <div id="e2-bg"></div><div id="e2-night"></div><div id="e2-glow"></div>
+    <div id="e2-sph-a" class="sphere gold" style="left:-80px;top:1300px;width:230px;height:230px"></div>
+    <div id="e2-sph-b" class="sphere petrol" style="left:910px;top:1330px;width:190px;height:190px"></div>
+    <div id="e2-sph-c" class="sphere deep" style="left:840px;top:100px;width:140px;height:140px"></div>
+
+    <div id="e2-cam"><div id="e2-shop" class="shop" data-tz="shop"></div></div>
+    <div id="e2-water"></div>
+    <div id="e2-clouds">
+      <div class="cl" style="left:300px;top:560px;width:230px;height:150px"></div>
+      <div class="cl" style="left:440px;top:520px;width:250px;height:170px"></div>
+      <div class="cl" style="left:580px;top:570px;width:200px;height:130px"></div>
+    </div>
+    <div id="e2-rain"></div>
+    <div id="e2-bolt" data-tz="icon" data-icon="bolt"></div>
+    <div id="e2-sparks"></div>
+    <div id="e2-g1" class="gearw"></div><div id="e2-g2" class="gearw"></div>
+    <div id="e2-bills"></div>
+    <div id="e2-flash"></div>
+
+    <div id="e2-ta" class="e2-t"><span id="ta1">Um curto-circuito…</span></div>
+    <div id="e2-tb" class="e2-t"><span id="tb1">Uma chuva forte…</span></div>
+    <div id="e2-tc" class="e2-t"><span id="tc1">Um equipamento</span><span id="tc2">que para…</span></div>
+    <div id="e2-k"><span id="k1">Quando o negócio para,</span><span id="k2" class="gold" style="--ex:1.2px;font-size:104px">as contas não.</span></div>
+    <div id="e2-count" class="glass"><b id="n1">01</b> <b>/</b> <b id="n2">02</b> <b>/</b> <b id="n3">03</b></div>
+  </div>
+  <script src="assets/components/shop.js"></script>
+  <script src="assets/components/icons.js"></script>
+  <script src="assets/tz-mount.js"></script>
+  <script>
+    (function () {
+      var scope = document.querySelector('[data-composition-id="e2-imprevistos"]');
+      function H(i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+      function gear(r, teeth, id) {
+        var pts = [], n = teeth * 4;
+        for (var i = 0; i < n; i++) { var a = (i / n) * Math.PI * 2, o = (i % 4 < 2); var rr = o ? r : r * 0.8; pts.push((r + Math.cos(a) * rr).toFixed(1) + ',' + (r + Math.sin(a) * rr).toFixed(1)); }
+        var ring = 'M' + pts.join('L') + 'Z', hole = 'M' + r + ' ' + (r - r * 0.32) + 'a' + r * 0.32 + ' ' + r * 0.32 + ' 0 1 0 0.01 0Z';
+        var cols = ['#7A5414', '#8c6118', '#A87818', '#C8922A', '#D9A93A'];
+        var h = '<svg viewBox="0 0 ' + 2 * r + ' ' + 2 * r + '">';
+        cols.forEach(function (c, k) { h += '<path d="' + ring + hole + '" fill-rule="evenodd" fill="' + c + '" transform="translate(' + (cols.length - k) * 1.6 + ' ' + (cols.length - k) * 2.2 + ')"/>'; });
+        h += '<defs><linearGradient id="gg' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFEDB0"/><stop offset=".5" stop-color="#F2C763"/><stop offset="1" stop-color="#D9A93A"/></linearGradient></defs>';
+        h += '<path d="' + ring + hole + '" fill-rule="evenodd" fill="url(#gg' + id + ')"/></svg>';
+        return h;
+      }
+      scope.querySelector('#e2-g1').innerHTML = gear(100, 10, 1);
+      scope.querySelector('#e2-g2').innerHTML = gear(70, 8, 2);
+      var rain = scope.querySelector('#e2-rain'), sp = scope.querySelector('#e2-sparks'), bl = scope.querySelector('#e2-bills');
+      for (var d = 0; d < 30; d++) { var e = document.createElement('div'); e.className = 'dp'; e.id = 'dp-' + d; e.style.left = (210 + H(d) * 660) + 'px'; e.style.top = '640px'; rain.appendChild(e); }
+      for (var s = 0; s < 12; s++) { var q = document.createElement('div'); q.className = 'e2-sp sphere gold'; q.id = 'sp-' + s; sp.appendChild(q); }
+      [[130, 860, -8], [770, 900, 7], [440, 1090, 3]].forEach(function (b, i) {
+        var c = document.createElement('div'); c.className = 'bill glass light'; c.id = 'bill-' + i; c.style.left = b[0] + 'px'; c.style.top = b[1] + 'px';
+        c.innerHTML = '<i style="top:30px;width:90px"></i><i style="top:60px;width:70px"></i><i style="top:90px;width:100px"></i><i style="top:120px;width:60px"></i>';
+        bl.appendChild(c);
+      });
+      TZ.mount(scope);
+      ['ta1', 'tb1', 'tc1', 'tc2', 'k1', 'k2'].forEach(function (id) { TZ.words(scope.querySelector('#' + id)); });
+      var W = function (sel) { return scope.querySelectorAll(sel + ' .word'); };
+      var wl = scope.querySelectorAll('.wl');
+      var tl = gsap.timeline({ paused: true });
+      var IN = function (sel, at) { tl.fromTo(W(sel), { y: 46, opacity: 0, rotationX: -55, transformPerspective: 800 }, { y: 0, opacity: 1, rotationX: 0, duration: 0.5, ease: 'back.out(1.6)', stagger: 0.09 }, at); };
+      var OUT = function (sel, at) { tl.to(sel, { y: -40, opacity: 0, duration: 0.3, ease: 'power3.in' }, at); };
+      var cnt = function (n, at) { ['#n1', '#n2', '#n3'].forEach(function (id, i) { tl.to(id, { color: i + 1 === n ? '#F2C763' : 'rgba(255,255,255,0.5)', scale: i + 1 === n ? 1.18 : 1, duration: 0.25, ease: 'back.out(2)' }, at); }); };
+
+      tl.fromTo('#e2-count', { y: -30, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.8)' }, 0.05);
+      cnt(1, 0.05); cnt(2, 2.9); cnt(3, 5.8);
+      tl.to('#e2-count', { opacity: 0, y: -20, duration: 0.3 }, 8.1);
+      tl.fromTo('#e2-glow', { scale: 0.9 }, { scale: 1.2, duration: 11, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#e2-sph-a', { y: 30 }, { y: -50, duration: 11, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#e2-sph-b', { y: -30 }, { y: 50, duration: 11, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#e2-sph-c', { y: 20 }, { y: -40, duration: 11, ease: 'sine.inOut' }, 0);
+      // loja: entra e a câmera orbita devagar
+      tl.fromTo('#e2-shop', { scale: 1.3, rotationX: -16, rotationY: -40, y: 80, opacity: 0.2 }, { scale: 1.55, rotationY: -28, y: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.3)' }, 0);
+      tl.to('#e2-shop', { rotationY: -10, scale: 1.7, duration: 10.2, ease: 'sine.inOut' }, 0.8);
+
+      /* a: curto-circuito 0–2.9 */
+      IN('#ta1', 0.25);
+      tl.fromTo('#e2-bolt', { y: -420, opacity: 1, scale: 1.2 }, { y: 60, opacity: 1, duration: 0.22, ease: 'power3.in', immediateRender: false }, 1.0);
+      tl.to('#e2-bolt', { opacity: 0, duration: 0.3, ease: 'power2.out' }, 1.25);
+      tl.fromTo('#e2-flash', { opacity: 0.55 }, { opacity: 0, duration: 0.4, ease: 'power2.out', immediateRender: false }, 1.2);
+      for (var i = 0; i < 12; i++) {
+        var ang = -Math.PI / 2 + (H(i) - 0.5) * 2.6, dist = 120 + H(i + 4) * 200;
+        tl.fromTo('#sp-' + i, { x: 0, y: 0, scale: 1, opacity: 1 }, { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist * 0.8 + 90, scale: 0.2, opacity: 0, duration: 0.9, ease: 'power2.out', immediateRender: false }, 1.22);
+      }
+      wl.forEach(function (w, k) {
+        tl.to(w, { opacity: 0.1, duration: 0.06 }, 1.25 + k * 0.05);
+        tl.to(w, { opacity: 1, duration: 0.06 }, 1.45 + k * 0.05);
+        tl.to(w, { opacity: 0.1, duration: 0.06 }, 1.65 + k * 0.05);
+        tl.to(w, { opacity: 1, duration: 0.2 }, 2.1 + k * 0.04);
+      });
+      tl.to('#e2-shop', { x: 10, duration: 0.05, yoyo: true, repeat: 5 }, 1.22);
+      OUT('#e2-ta', 2.55);
+
+      /* b: chuva forte 2.9–5.8 */
+      tl.fromTo('#e2-clouds', { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.4)' }, 2.85);
+      tl.to('#e2-clouds', { y: 10, x: 14, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 2 }, 3.45);
+      IN('#e2-tb', 3.15);
+      for (var dd = 0; dd < 30; dd++) {
+        var t0 = 3.3 + H(dd + 2) * 0.5;
+        for (var rp = 0; rp < 4; rp++) {
+          tl.fromTo('#dp-' + dd, { y: 0, opacity: 0 }, { y: 560 + H(dd + 7) * 80, opacity: 0.95, duration: 0.55, ease: 'power1.in' }, t0 + rp * 0.62);
+        }
+      }
+      tl.fromTo('#e2-water', { opacity: 0, scaleX: 0.4, scaleY: 0.3 }, { opacity: 1, scaleX: 1, scaleY: 1, duration: 2.0, ease: 'power2.out' }, 3.5);
+      tl.to('#e2-night', { opacity: 0.35, duration: 0.8 }, 3.0);
+      OUT('#e2-tb', 5.5);
+      tl.to('#e2-clouds', { opacity: 0, y: -60, duration: 0.4, ease: 'power2.in' }, 5.6);
+      tl.to('#e2-rain', { opacity: 0, duration: 0.3 }, 5.55);
+      tl.to('#e2-water', { opacity: 0, duration: 0.5 }, 5.7);
+
+      /* c: equipamento que para 5.8–8.2 */
+      IN('#e2-tc', 6.0);
+      tl.to('#e2-night', { opacity: 0.2, duration: 0.5 }, 5.8);
+      ['#e2-g1', '#e2-g2'].forEach(function (g, k) {
+        tl.fromTo(g, { opacity: 0, scale: 0.3, rotation: 0 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 5.85 + k * 0.1);
+      });
+      tl.fromTo('#e2-g1', { rotation: 0 }, { rotation: 240, duration: 1.7, ease: 'power3.out' }, 5.85);
+      tl.fromTo('#e2-g2', { rotation: 0 }, { rotation: -300, duration: 1.7, ease: 'power3.out' }, 5.85);
+      wl.forEach(function (w, k) { tl.to(w, { opacity: 0.08, duration: 0.3 }, 7.1 + k * 0.1); });
+      tl.to('#e2-night', { opacity: 0.6, duration: 0.8 }, 7.0);
+      OUT('#e2-tc', 8.0);
+      tl.to('#e2-g1, #e2-g2', { opacity: 0, scale: 0.6, duration: 0.4, ease: 'power2.in' }, 8.0);
+
+      /* fecho 8.2–11 */
+      IN('#e2-k', 8.3);
+      [0, 1, 2].forEach(function (b) {
+        tl.fromTo('#bill-' + b, { opacity: 0, y: 80, rotation: (b - 1) * 14, scale: 0.6 }, { opacity: 1, y: 0, rotation: (b - 1) * 8, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 8.6 + b * 0.25);
+        tl.to('#bill-' + b, { y: -14, duration: 0.9, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 9.3 + b * 0.2);
+      });
+      tl.fromTo('#k2', { scale: 1 }, { scale: 1.06, duration: 0.5, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 9.6);
+      // saída: tudo recua para o escudo da próxima cena
+      tl.to('#e2-k, #bill-0, #bill-1, #bill-2', { opacity: 0, y: -30, duration: 0.3, ease: 'power3.in' }, 10.65);
+      tl.to('#e2-shop', { scale: 2.3, y: 150, opacity: 0, duration: 0.35, ease: 'power3.in' }, 10.65);
+      window.__timelines = window.__timelines || {};
+      window.__timelines['e2-imprevistos'] = tl;
+    })();
+  </script>
+</template>
