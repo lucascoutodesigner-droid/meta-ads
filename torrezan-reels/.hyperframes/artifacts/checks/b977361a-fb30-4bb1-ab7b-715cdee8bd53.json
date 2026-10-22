@@ -1,0 +1,107 @@
+{
+  "ok": false,
+  "strict": false,
+  "browserSkipped": true,
+  "lint": {
+    "ok": false,
+    "errorCount": 2,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "subcomposition_root_styled_by_class",
+        "severity": "error",
+        "message": "Root element has class=\"tz\" and is styled by 1 rule(s) keyed off that class (e.g. .tz). At render, every sub-composition rule is scoped to [data-composition-id=\"s1-hook\"] <selector>, so a selector whose leftmost part is the ROOT's own class becomes a descendant selector that cannot match the scoped element itself. Since #1886 the producer preserves the authored root as an inner wrapper, so this no longer renders the scene unstyled, but #root is the shape the scoper special-cases and the registry blocks model. Use it so preview, render, and Studio agree.",
+        "selector": ".tz",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/meta-ads/torrezan-reels/compositions/s1-hook.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Give the root id=\"root\" and style it with `#root { ... }` plus plain descendant selectors (`.kicker`, `#hero`). The runtime already scopes each sub-composition by data-composition-id, so a class namespace on the root is redundant."
+      },
+      {
+        "code": "subcomposition_root_styled_by_class",
+        "severity": "error",
+        "message": "Root element has class=\"tz\" and is styled by 1 rule(s) keyed off that class (e.g. .tz). At render, every sub-composition rule is scoped to [data-composition-id=\"s6-cta\"] <selector>, so a selector whose leftmost part is the ROOT's own class becomes a descendant selector that cannot match the scoped element itself. Since #1886 the producer preserves the authored root as an inner wrapper, so this no longer renders the scene unstyled, but #root is the shape the scoper special-cases and the registry blocks model. Use it so preview, render, and Studio agree.",
+        "selector": ".tz",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/meta-ads/torrezan-reels/compositions/s6-cta.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Give the root id=\"root\" and style it with `#root { ... }` plus plain descendant selectors (`.kicker`, `#hero`). The runtime already scopes each sub-composition by data-composition-id, so a class namespace on the root is redundant."
+      }
+    ],
+    "filesScanned": 3
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "duration": 0,
+    "samples": [],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 0,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [],
+    "checked": 0,
+    "passed": 0
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "step": 0,
+    "samples": 0
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

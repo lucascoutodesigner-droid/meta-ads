@@ -1,0 +1,136 @@
+<template>
+  <link rel="stylesheet" href="assets/tz.css" />
+  <style>
+    #root{position:absolute;inset:0;overflow:hidden;font-family:var(--font);color:#fff}
+    #s1-bg{position:absolute;inset:0;background:linear-gradient(135deg,#003146 0%,#005166 100%)}
+    #s1-glow{position:absolute;left:100px;top:700px;width:880px;height:700px;border-radius:50%;
+      background:radial-gradient(ellipse,rgba(124,195,220,.30),rgba(124,195,220,0) 66%)}
+    #s1-cam{position:absolute;inset:0;perspective:1700px;perspective-origin:50% 18%}
+    #s1-grid{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-style:preserve-3d}
+    #s1-road{position:absolute;left:380px;top:-250px;width:320px;height:1900px;opacity:0;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 80%,transparent 100%);
+      background:linear-gradient(90deg,#071f2c,#0c3246 50%,#071f2c);border-left:6px solid rgba(255,255,255,.75);border-right:6px solid rgba(255,255,255,.75)}
+    .s1-car{width:128px;height:236px}
+    .s1-ms{position:absolute;width:92px;height:112px;left:18px;top:58px;opacity:0;transform-style:preserve-3d}
+    .s1-ms-glow{position:absolute;left:-30px;top:10px;width:150px;height:150px;border-radius:50%;
+      background:radial-gradient(circle,rgba(242,199,99,.75),rgba(242,199,99,0) 68%);opacity:0}
+
+    #s1-label{left:88px;top:290px;height:52px;padding:0 26px;border-radius:26px;line-height:48px;
+      font-size:24px;font-weight:800;letter-spacing:3px;color:#fff;white-space:nowrap}
+    #s1-seven{position:absolute;left:84px;top:342px;font-size:400px;line-height:1;font-weight:900;letter-spacing:-0.04em;--ex:3.2px}
+    #s1-head{position:absolute;left:372px;top:420px;font-size:92px;font-weight:900;letter-spacing:-0.025em;line-height:1.04;white-space:nowrap}
+    #s1-head span{display:block}
+    #s1-sub{position:absolute;left:88px;width:904px;top:750px;font-size:56px;font-weight:800;letter-spacing:-0.01em;line-height:1.1;color:#fff;white-space:nowrap}
+    #s1-sub .word:last-child{color:var(--gold)}
+  </style>
+  <div id="root" data-composition-id="s1-hook" data-width="1080" data-height="1920">
+    <div id="s1-bg"></div>
+    <div id="s1-glow"></div>
+    <div id="s1-sph-a" class="sphere petrol" style="left:870px;top:1330px;width:220px;height:220px"></div>
+    <div id="s1-sph-b" class="sphere gold" style="left:-60px;top:1380px;width:170px;height:170px"></div>
+    <div id="s1-sph-c" class="sphere deep" style="left:820px;top:90px;width:150px;height:150px"></div>
+
+    <div id="s1-cam">
+      <div id="s1-grid">
+        <div id="s1-road"></div>
+      </div>
+    </div>
+
+    <div id="s1-label" class="glass">DADO CNSEG 2026</div>
+    <div id="s1-seven" class="gold">7</div>
+    <div id="s1-head"><span id="s1-h1">EM CADA</span><span id="s1-h2">10 CARROS</span></div>
+    <div id="s1-sub">rodam sem seguro no Brasil.</div>
+  </div>
+  <script src="assets/components/shield.js"></script>
+  <script src="assets/components/car.js"></script>
+  <script src="assets/tz-mount.js"></script>
+  <script>
+    (function(){
+      var scope = document.querySelector('[data-composition-id="s1-hook"]');
+      var grid = scope.querySelector('#s1-grid');
+      // 2 linhas x 5 colunas de carros 3D (vista de cima); 3 protegidos, 7 sem seguro
+      var COLS = 5, GAP_X = 190, GAP_Y = 290, X0 = 540 - (COLS - 1) * GAP_X / 2, Y0 = 1085 - GAP_Y / 2 - 118;
+      var protectedIdx = [2, 5, 8];
+      var cars = [];
+      for (var i = 0; i < 10; i++) {
+        var r = Math.floor(i / COLS), c = i % COLS;
+        var wrap = document.createElement('div');
+        wrap.className = 's1-car car';
+        wrap.id = 's1-car-' + i;
+        wrap.setAttribute('data-tz', 'car');
+        wrap.style.left = (X0 + c * GAP_X - 64) + 'px';
+        wrap.style.top = (Y0 + r * GAP_Y) + 'px';
+        grid.appendChild(wrap);
+        cars.push(wrap);
+      }
+      TZ.mount(scope);
+      protectedIdx.forEach(function (i) {
+        var car = cars[i];
+        car.insertAdjacentHTML('beforeend',
+          '<div class="s1-ms-glow" id="s1-glow-' + i + '"></div><div class="s1-ms shield3d" id="s1-ms-' + i + '" data-tz="shield"></div>');
+      });
+      TZ.mount(scope);
+
+      var tl = gsap.timeline({ paused: true });
+      var text = TZ.words(scope.querySelector('#s1-sub'));
+
+      // câmera: dolly-in rápido, depois deriva lenta
+      tl.fromTo('#s1-grid', { rotationX: 62, scale: 0.9, transformOrigin: '50% 53%' }, { rotationX: 55, scale: 0.98, duration: 1.2, ease: 'power3.out' }, 0);
+      tl.to('#s1-grid', { rotationX: 51, scale: 1.04, duration: 2.1, ease: 'sine.inOut' }, 1.2);
+      // parallax das esferas
+      tl.fromTo('#s1-sph-a', { y: 40, x: 30 }, { y: -50, x: -10, duration: 4, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#s1-sph-b', { y: -30 }, { y: 40, duration: 4, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#s1-sph-c', { y: 20 }, { y: -40, duration: 4, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#s1-glow', { scale: 0.9 }, { scale: 1.15, duration: 4, ease: 'sine.inOut' }, 0);
+
+      // carros caem no lugar com bounce (já em queda no frame 0)
+      cars.forEach(function (car, i) {
+        var d = 0.8;
+        var start = (i % COLS) * 0.045 + Math.floor(i / COLS) * 0.07;
+        tl.fromTo(car, { z: 150 + (i % COLS) * 20, rotationZ: i % 2 ? 5 : -5 }, { z: 0, rotationZ: 0, duration: d, ease: 'bounce.out' }, start);
+        tl.fromTo(car.querySelector('.c-shadow'), { opacity: 0.35, scale: 1.3 }, { opacity: 1, scale: 1, duration: d, ease: 'power2.in' }, start);
+      });
+
+      // 7 perdem a cor (ficam em traço apagado); 3 ganham escudo dourado
+      cars.forEach(function (car, i) {
+        if (protectedIdx.indexOf(i) >= 0) return;
+        var k = 1.25 + (i % 7) * 0.05;
+        tl.to(car.querySelector('.c-solid'), { opacity: 0.06, duration: 0.5, ease: 'power2.inOut' }, k);
+        tl.to(car.querySelector('.c-shadow'), { opacity: 0.25, duration: 0.5 }, k);
+        tl.to(car.querySelector('.c-line'), { opacity: 1, duration: 0.5, ease: 'power2.inOut' }, k);
+      });
+      protectedIdx.forEach(function (i, n) {
+        var t = 1.7 + n * 0.18;
+        tl.fromTo('#s1-ms-' + i, { opacity: 0, z: 40, scale: 0.2, rotationX: -52, rotationY: -160 },
+          { opacity: 1, z: 90, scale: 1, rotationX: -52, rotationY: 0, duration: 0.65, ease: 'back.out(1.8)' }, t);
+        tl.to('#s1-ms-' + i, { rotationY: 14, z: 100, duration: 0.8, ease: 'sine.inOut', yoyo: true, repeat: 1 }, t + 0.65);
+        tl.fromTo('#s1-glow-' + i, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1.1, duration: 0.5, ease: 'power2.out' }, t);
+        tl.to('#s1-glow-' + i, { opacity: 0.55, scale: 0.95, duration: 0.6, ease: 'sine.inOut', yoyo: true, repeat: 2 }, t + 0.5);
+      });
+
+      // rótulo e textos (já em movimento no frame 0)
+      tl.fromTo('#s1-label', { y: -14, scale: 1.08, opacity: 0.85 }, { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0);
+      tl.fromTo('#s1-seven', { scale: 1.2, transformOrigin: '30% 60%' }, { scale: 1, duration: 0.55, ease: 'back.out(1.6)' }, 0);
+      tl.fromTo('#s1-h1', { x: 60, opacity: 0.85, scale: 1.1, transformOrigin: '0% 50%' }, { x: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.6)' }, 0);
+      tl.fromTo('#s1-h2', { x: 60, opacity: 0.85, scale: 1.1, transformOrigin: '0% 50%' }, { x: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.6)' }, 0.1);
+      tl.fromTo(text, { y: 36, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)', stagger: 0.1 }, 0.45);
+      // leve respiração do "7" enquanto lê
+      tl.to('#s1-seven', { scale: 1.035, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: 1, transformOrigin: '30% 60%' }, 1.0);
+
+      // transição: os 7 sem seguro se alinham e viram estrada
+      var ghosts = cars.filter(function (c, i) { return protectedIdx.indexOf(i) < 0; });
+      tl.to('#s1-label, #s1-seven, #s1-head, #s1-sub', { y: -50, opacity: 0, duration: 0.4, ease: 'power3.in', stagger: 0.04 }, 3.3);
+      tl.to('#s1-sph-a, #s1-sph-b, #s1-sph-c', { opacity: 0, duration: 0.4 }, 3.4);
+      protectedIdx.forEach(function (i) {
+        tl.to(cars[i], { z: -400, opacity: 0, duration: 0.5, ease: 'power3.in' }, 3.3);
+      });
+      ghosts.forEach(function (car, n) {
+        var cx = parseFloat(car.style.left), cy = parseFloat(car.style.top);
+        tl.to(car, { x: 540 - 64 - cx, y: (-250 + n * 230) - cy, scaleX: 0.1, scaleY: 0.5, duration: 0.55, ease: 'power3.inOut' }, 3.3 + n * 0.03);
+      });
+      tl.to('#s1-road', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 3.5);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['s1-hook'] = tl;
+    })();
+  </script>
+</template>

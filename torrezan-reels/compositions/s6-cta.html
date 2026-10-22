@@ -1,0 +1,118 @@
+<template>
+  <link rel="stylesheet" href="assets/tz.css" />
+  <style>
+    #root{position:absolute;inset:0;overflow:hidden;font-family:var(--font);color:#fff}
+    #s6-bg{position:absolute;inset:0;background:linear-gradient(135deg,#003146 0%,#005166 100%)}
+    #s6-glow{position:absolute;left:140px;top:150px;width:800px;height:800px;border-radius:50%;
+      background:radial-gradient(circle,rgba(124,195,220,.34),rgba(124,195,220,0) 66%)}
+    #s6-cam{position:absolute;inset:0;perspective:1600px;perspective-origin:50% 38%}
+    #s6-shield{left:406px;top:282px;width:268px;height:326px}
+    #s6-title{position:absolute;left:88px;width:904px;top:640px;text-align:center;font-size:100px;--ex:1.1px}
+    #s6-title .l2{display:block}
+    #s6-sub{position:absolute;left:88px;width:904px;top:862px;text-align:center;font-size:42px}
+    #s6-cta{left:130px;top:952px;width:820px;height:124px;border-radius:62px}
+    #s6-wa{left:14px;top:14px;width:96px;height:96px}
+    #s6-wa-ic{position:absolute;left:14px;top:14px;width:68px;height:68px}
+    #s6-pulse{position:absolute;left:14px;top:14px;width:96px;height:96px;border-radius:50%;border:4px solid #5FE08F;opacity:0}
+    #s6-cta-txt{position:absolute;left:138px;top:0;height:124px;line-height:124px;font-size:46px;font-weight:800;letter-spacing:-0.01em;white-space:nowrap}
+    #s6-arrow{position:absolute;right:30px;top:30px;width:64px;height:64px}
+    #s6-sheen{position:absolute;top:0;left:-200px;width:120px;height:124px;
+      background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));transform:skewX(-18deg)}
+    #s6-cta-clip{position:absolute;inset:0;border-radius:62px;overflow:hidden}
+    #s6-phone{position:absolute;left:88px;width:904px;top:1100px;text-align:center;font-size:44px;font-weight:800;letter-spacing:.01em}
+    #s6-handle{position:absolute;left:88px;width:904px;top:1154px;text-align:center;font-size:40px;font-weight:600;color:var(--ice)}
+    #s6-wm{position:absolute;left:88px;width:904px;top:1208px;text-align:center;font-size:24px;opacity:.9}
+  </style>
+  <div id="root" data-composition-id="s6-cta" data-width="1080" data-height="1920">
+    <div id="s6-bg"></div>
+    <div id="s6-glow"></div>
+    <!-- esferas em parallax (decorativas) -->
+    <div id="s6-sph-a" class="sphere gold"  style="left:-70px;top:360px;width:230px;height:230px"></div>
+    <div id="s6-sph-b" class="sphere petrol" style="left:900px;top:470px;width:170px;height:170px"></div>
+    <div id="s6-sph-c" class="sphere deep"  style="left:60px;top:1330px;width:300px;height:300px"></div>
+    <div id="s6-sph-d" class="sphere gold"  style="left:840px;top:1400px;width:160px;height:160px"></div>
+    <div id="s6-sph-e" class="sphere ice"   style="left:760px;top:170px;width:90px;height:90px;opacity:.85"></div>
+
+    <div id="s6-cam">
+      <div id="s6-shield" data-tz="shield" class="shield3d"></div>
+    </div>
+
+    <h1 id="s6-title" class="t-title"><span class="l1">Fale com um</span><span class="l2 gold">corretor.</span></h1>
+    <p id="s6-sub" class="t-support">Cotação gratuita pelo WhatsApp.</p>
+
+    <div id="s6-cta" class="glass">
+      <div id="s6-cta-clip"><div id="s6-sheen"></div></div>
+      <div id="s6-pulse"></div>
+      <div id="s6-wa" class="sphere green"><div id="s6-wa-ic" data-tz="icon" data-icon="whatsapp"></div></div>
+      <div id="s6-cta-txt">Chama no WhatsApp</div>
+      <div id="s6-arrow" data-tz="icon" data-icon="arrow"></div>
+    </div>
+
+    <p id="s6-phone">(17) 99652-7948</p>
+    <p id="s6-handle">@torrezanseguros</p>
+    <div id="s6-wm" data-tz="wordmark"></div>
+  </div>
+  <script src="assets/components/shield.js"></script>
+  <script src="assets/components/wordmark.js"></script>
+  <script src="assets/components/icons.js"></script>
+  <script src="assets/tz-mount.js"></script>
+  <script>
+    (function(){
+      TZ.mount(document.querySelector('[data-composition-id="s6-cta"]'));
+      var tl = gsap.timeline({ paused: true });
+      var titleWords = [].slice.call(document.querySelectorAll('#s6-title .l1')).concat([].slice.call(document.querySelectorAll('#s6-title .l2')));
+      // título: cada linha entra por palavras
+      var l1 = document.querySelector('#s6-title .l1'), l2 = document.querySelector('#s6-title .l2');
+      var w1 = TZ.words(l1), w2 = TZ.words(l2);
+      l1.style.display = 'block';
+
+      // fundo: respiração lenta
+      tl.fromTo('#s6-glow', { scale: 0.85, opacity: 0.5 }, { scale: 1.12, opacity: 1, duration: 7, ease: 'sine.inOut' }, 0);
+      // esferas em parallax (fundo lento, objetos médios)
+      tl.fromTo('#s6-sph-a', { y: 40, x: -30 }, { y: -50, x: 20, duration: 7, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#s6-sph-b', { y: -20 }, { y: 60, x: -20, duration: 7, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#s6-sph-c', { y: 30, scale: 1 }, { y: -30, scale: 1.06, duration: 7, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#s6-sph-d', { y: 40 }, { y: -40, duration: 7, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#s6-sph-e', { y: 20 }, { y: -30, duration: 7, ease: 'sine.inOut' }, 0);
+
+      // escudo: entra girando e depois respira
+      tl.fromTo('#s6-shield', { scale: 0.45, rotationY: -150, y: 80, opacity: 0, transformPerspective: 1400 },
+        { scale: 1, rotationY: 0, y: 0, opacity: 1, duration: 1.0, ease: 'back.out(1.5)' }, 0);
+      tl.to('#s6-shield', { rotationY: 11, rotationX: -4, scale: 1.04, y: -10, duration: 1.8, ease: 'sine.inOut' }, 1.0);
+      tl.to('#s6-shield', { rotationY: -11, rotationX: 3, scale: 1.0, y: 0, duration: 2.0, ease: 'sine.inOut' }, 2.8);
+      tl.to('#s6-shield', { rotationY: 6, rotationX: 0, scale: 1.03, y: -8, duration: 2.2, ease: 'sine.inOut' }, 4.8);
+
+      // título
+      tl.fromTo(w1, { y: 60, opacity: 0, rotationX: -60, transformPerspective: 900 },
+        { y: 0, opacity: 1, rotationX: 0, duration: 0.55, ease: 'back.out(1.7)', stagger: 0.11 }, 0.55);
+      tl.fromTo(w2, { y: 60, opacity: 0, scale: 1.25, rotationX: -60, transformPerspective: 900 },
+        { y: 0, opacity: 1, scale: 1, rotationX: 0, duration: 0.6, ease: 'back.out(1.7)' }, 0.95);
+      // subtítulo
+      tl.fromTo('#s6-sub', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 1.55);
+      // CTA
+      tl.fromTo('#s6-cta', { scale: 0.7, y: 40, opacity: 0, transformPerspective: 1000, rotationX: 25 },
+        { scale: 1, y: 0, opacity: 1, rotationX: 0, duration: 0.7, ease: 'back.out(1.6)' }, 2.0);
+      tl.fromTo('#s6-wa', { scale: 0 }, { scale: 1, duration: 0.5, ease: 'back.out(2.2)' }, 2.3);
+      tl.fromTo('#s6-cta-txt', { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }, 2.4);
+      tl.fromTo('#s6-arrow', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: 'back.out(2)' }, 2.6);
+      tl.fromTo('#s6-sheen', { x: 0 }, { x: 1100, duration: 0.9, ease: 'power2.inOut' }, 2.9);
+      // seta empurra de leve
+      [3.4, 4.9, 6.4].forEach(function (t) {
+        tl.to('#s6-arrow', { x: 10, duration: 0.25, ease: 'power2.out' }, t);
+        tl.to('#s6-arrow', { x: 0, duration: 0.35, ease: 'power2.inOut' }, t + 0.25);
+      });
+      // pulso na esfera verde a cada 1,5 s
+      [2.9, 4.4, 5.9].forEach(function (t) {
+        tl.fromTo('#s6-pulse', { scale: 1, opacity: 0.85 }, { scale: 1.65, opacity: 0, duration: 1.0, ease: 'power2.out' }, t);
+        tl.fromTo('#s6-wa', { scale: 1 }, { scale: 1.07, duration: 0.18, ease: 'power2.out', yoyo: true, repeat: 1 }, t);
+      });
+      // contatos e logo
+      tl.fromTo('#s6-phone', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 3.2);
+      tl.fromTo('#s6-handle', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 3.45);
+      tl.fromTo('#s6-wm', { opacity: 0, y: 14 }, { opacity: 0.9, y: 0, duration: 0.6, ease: 'power2.out' }, 3.9);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['s6-cta'] = tl;
+    })();
+  </script>
+</template>

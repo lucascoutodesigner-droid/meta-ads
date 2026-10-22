@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait"
+  data-composition-variables='[{"id":"guides","type":"boolean","label":"Mostrar guia da zona segura","default":false}]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      html,body{width:1080px;height:1920px;overflow:hidden;background:#003146}
+      #root{position:absolute;inset:0;width:1080px;height:1920px;overflow:hidden;background:#003146}
+      /* fio dourado de continuidade: percorre as margens e as faixas decorativas */
+      #thread{position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:50;pointer-events:none}
+      /* guia da zona segura (ligar com a variável "guides") */
+      #safe-guide{position:absolute;inset:0;z-index:999;pointer-events:none;display:none}
+      #safe-guide .band{position:absolute;left:0;width:1080px;background:rgba(255,40,60,.28)}
+      #safe-guide .box{position:absolute;left:88px;top:270px;width:904px;height:980px;border:3px dashed #00ffa8}
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="11" data-width="1080" data-height="1920">
+      <div id="s1-hook" class="clip" data-composition-id="s1-hook" data-composition-src="compositions/s1-hook.html"
+        data-start="0" data-duration="4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="s6-cta" class="clip" data-composition-id="s6-cta" data-composition-src="compositions/s6-cta.html"
+        data-start="4" data-duration="7" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+
+      <svg id="thread" viewBox="0 0 1080 1920" data-layout-ignore>
+        <defs>
+          <filter id="tglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4"/></filter>
+          <linearGradient id="tgrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset="1" stop-color="#D9A93A"/></linearGradient>
+        </defs>
+        <path id="thread-glow" d="M1130 130C800 50 300 80 62 232C14 420 26 900 38 1330C70 1530 520 1680 1130 1500" fill="none" stroke="#F2C763" stroke-width="9" opacity=".5" filter="url(#tglow)" pathLength="1000" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+        <path id="thread-line" d="M1130 130C800 50 300 80 62 232C14 420 26 900 38 1330C70 1530 520 1680 1130 1500" fill="none" stroke="url(#tgrad)" stroke-width="3" stroke-linecap="round" pathLength="1000" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+        <path id="thread-spark" d="M1130 130C800 50 300 80 62 232C14 420 26 900 38 1330C70 1530 520 1680 1130 1500" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" pathLength="1000" stroke-dasharray="26 974" stroke-dashoffset="0" opacity=".9"/>
+      </svg>
+
+      <div id="safe-guide" data-layout-ignore>
+        <div class="band" style="top:0;height:270px"></div>
+        <div class="band" style="top:1250px;height:670px"></div>
+        <div class="box"></div>
+      </div>
+    </div>
+    <script>
+      var v = (window.__hyperframes && window.__hyperframes.getVariables) ? window.__hyperframes.getVariables() : {};
+      if (v.guides) document.getElementById('safe-guide').style.display = 'block';
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+      tl.to('#thread-line', { strokeDashoffset: 0, duration: 10.5, ease: 'none' }, 0);
+      tl.to('#thread-glow', { strokeDashoffset: 0, duration: 10.5, ease: 'none' }, 0);
+      tl.fromTo('#thread-spark', { strokeDashoffset: 0 }, { strokeDashoffset: -600, duration: 11, ease: 'none' }, 0);
+      window.__timelines['main'] = tl;
+    </script>
+  </body>
+</html>

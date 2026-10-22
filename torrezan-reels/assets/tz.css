@@ -1,0 +1,73 @@
+/* Torrezan Seguros — kit visual compartilhado (tokens, esfera, vidro, texto dourado) */
+@font-face{font-family:'Montserrat';font-weight:600;font-style:normal;src:url('fonts/montserrat-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-weight:800;font-style:normal;src:url('fonts/montserrat-latin-800-normal.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-weight:900;font-style:normal;src:url('fonts/montserrat-latin-900-normal.woff2') format('woff2')}
+:root{
+  --petrol-d:#003146; --petrol:#005166; --blue:#0A6B96; --ice:#7CC3DC;
+  --gold:#F2C763; --gold-1:#D9A93A; --gold-2:#A87818; --gold-3:#7A5414;
+  --mint:#E4F3ED; --wa-1:#1FB463; --wa-2:#128C4A;
+  --font:'Montserrat','Helvetica',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+.tz{font-family:var(--font);color:#fff}
+.abs{position:absolute}
+.bg-petrol{background:linear-gradient(135deg,#003146 0%,#005166 100%)}
+.bg-mint{background:var(--mint)}
+
+/* ---- tipografia ---- */
+.t-title{font-weight:900;letter-spacing:-0.02em;line-height:1.02}
+.t-support{font-weight:600;line-height:1.2}
+.t-label{font-weight:800;letter-spacing:3px;text-transform:uppercase;font-size:24px}
+.gold{color:var(--gold);
+  text-shadow:
+   0 calc(var(--ex,1px)*1) 0 var(--gold-1),0 calc(var(--ex,1px)*2) 0 var(--gold-1),
+   0 calc(var(--ex,1px)*3) 0 var(--gold-1),0 calc(var(--ex,1px)*4) 0 var(--gold-1),
+   0 calc(var(--ex,1px)*5) 0 var(--gold-2),0 calc(var(--ex,1px)*6) 0 var(--gold-2),
+   0 calc(var(--ex,1px)*7) 0 var(--gold-2),0 calc(var(--ex,1px)*8) 0 var(--gold-2),
+   0 calc(var(--ex,1px)*9) 0 var(--gold-3),0 calc(var(--ex,1px)*10) 0 var(--gold-3),
+   0 calc(var(--ex,1px)*11) 0 var(--gold-3),0 calc(var(--ex,1px)*12) 0 var(--gold-3),
+   0 calc(var(--ex,1px)*22) calc(var(--ex,1px)*20) rgba(0,16,26,.42)}
+.word{display:inline-block;will-change:transform}
+
+/* ---- esferas brilhantes ---- */
+.sphere{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,var(--s0) 0%,var(--s1) 34%,var(--s2) 78%,var(--s3) 100%);
+  box-shadow:0 34px 50px -10px rgba(0,14,22,.55), inset -10px -14px 26px rgba(0,0,0,.28)}
+.sphere::after{content:"";position:absolute;left:20%;top:14%;width:26%;height:18%;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,255,255,.75),rgba(255,255,255,0) 70%);transform:rotate(-30deg)}
+.sphere.gold{--s0:#FFF0BE;--s1:#F2C763;--s2:#C8922A;--s3:#7A5414}
+.sphere.petrol{--s0:#5FB2D4;--s1:#0A6B96;--s2:#014766;--s3:#002a3d}
+.sphere.deep{--s0:#2f8aaa;--s1:#00506e;--s2:#00354b;--s3:#001d2b}
+.sphere.green{--s0:#8CF0B4;--s1:#1FB463;--s2:#128C4A;--s3:#0a5a2f}
+.sphere.ice{--s0:#ffffff;--s1:#9fd6e8;--s2:#4aa3c6;--s3:#1f6f92}
+
+/* ---- vidro fosco ---- */
+.glass{position:absolute;
+  background:linear-gradient(180deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.10) 55%,rgba(255,255,255,.16) 100%);
+  border:2px solid rgba(255,255,255,.42);
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -14px 24px rgba(0,30,46,.18),0 26px 44px rgba(0,16,26,.42)}
+.glass.light{background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.62));
+  border:2px solid rgba(255,255,255,.95);
+  box-shadow:inset 0 3px 0 #fff,inset 0 -12px 22px rgba(0,81,102,.10),0 24px 40px rgba(0,49,70,.22)}
+
+/* ---- escudo 3D ---- */
+.shield3d{position:absolute;transform-style:preserve-3d}
+.shield3d .sh-l{position:absolute;inset:0}
+.shield3d svg{width:100%;height:100%;overflow:visible;display:block}
+
+/* ---- carro 3D (vista de cima) ---- */
+.car{position:absolute;transform-style:preserve-3d}
+.car .c-solid{position:absolute;inset:0;transform-style:preserve-3d}
+.car .c-solid>div{position:absolute}
+.car .cb{inset:0;border-radius:42% 42% 36% 36% / 24% 24% 18% 18%}
+.car .cc{left:12%;right:12%;top:30%;height:36%;border-radius:30% 30% 26% 26% / 24% 24% 24% 24%}
+.car .cw{width:15%;height:21%;border-radius:30%;background:linear-gradient(90deg,#04202d,#0b3d54)}
+.car .cl{width:22%;height:5.5%;border-radius:50%;background:#FFE9A8;box-shadow:0 0 22px 6px rgba(242,199,99,.65)}
+.car .c-shadow{position:absolute;left:-6%;right:-6%;top:2%;bottom:-2%;border-radius:42%;
+  background:radial-gradient(ellipse,rgba(0,12,20,.55),rgba(0,12,20,0) 72%)}
+.car .c-line{position:absolute;inset:0;border-radius:42% 42% 36% 36% / 24% 24% 18% 18%;
+  border:3px dashed rgba(124,195,220,.55);opacity:0}
+
+/* ---- wordmark provisório ---- */
+.wm{font-family:var(--font);font-weight:900;letter-spacing:5px;color:#fff;white-space:nowrap}
+.wm i{font-style:normal;color:var(--gold);margin-left:.4em}
